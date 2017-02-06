@@ -6,7 +6,6 @@ let cors = require('cors');
 let express = require('express');
 let HttpStatus = require('http-status-codes');
 let logger = require('morgan');
-let mongoose = require('mongoose');
 let path = require('path');
 
 let palindromeRoute = require('../../modules/palindrome').palindromeRoute;
