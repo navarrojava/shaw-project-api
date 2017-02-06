@@ -15,16 +15,17 @@ class PalindromeService {
      */
     verify(text) {
 
+        text = this.replaceSpecialChars(text);
         return new Promise((resolve, reject) => {
             let leftCharPosition = 0;
-            let rightCharPosition = text.trim().length -1;
+            let rightCharPosition = text.trim().length - 1;
             let breakChar = this.midChar(text);
             let isPalindrome = true;
 
             while (leftCharPosition <= breakChar) {
-                 isPalindrome = text.charAt(leftCharPosition++) == text.charAt(rightCharPosition--);
+                isPalindrome = text.charAt(leftCharPosition++) == text.charAt(rightCharPosition--);
 
-                if(!isPalindrome){
+                if (!isPalindrome) {
                     reject();
                 }
             }
@@ -32,6 +33,18 @@ class PalindromeService {
 
         });
     }
+
+    replaceSpecialChars(str) {
+
+        str = str.replace(/[ÀÁÂÃÄÅ]/, "A");
+        str = str.replace(/[àáâãäå]/, "a");
+        str = str.replace(/[ÈÉÊË]/, "E");
+        str = str.replace(/[Ç]/, "C");
+        str = str.replace(/[ç]/, "c");
+
+        return str.replace(/[^a-z0-9]/gi, '').toLocaleLowerCase();
+    }
+
 
     midChar(text) {
         let textLength = text.length;
